@@ -1,10 +1,12 @@
 import { Component } from 'react';
-import { QuizCounter } from './QuizCounter/QuizCounter';
+import { Statistics } from './Statistics/Statistics';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Notification } from './Notification/Notification';
 export class App extends Component {
   state = {
-    good: 2,
-    neutral: 3,
-    bad: 4,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
   changeCounter = option => {
     this.setState(prevState => {
@@ -14,10 +16,36 @@ export class App extends Component {
     });
     console.log(this.state);
   };
-
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+  countPositiveFeedbackPercentage = () => {
+    const totalFeedbacksNumber = this.countTotalFeedback();
+    if (totalFeedbacksNumber === 0) {
+      return 0;
+    }
+    return Math.floor((this.state.good / totalFeedbacksNumber) * 100);
+  };
   render() {
     let stateNew = this.state;
-    console.log(stateNew);
-    return <QuizCounter item={stateNew} counter={this.changeCounter} />;
+    const total = this.countTotalFeedback();
+    console.log(total);
+    return (
+      <>
+        <FeedbackOptions counter={this.changeCounter} />
+        {total === 0 ? (
+          <>
+            <Notification message="There is no feedback" />
+          </>
+        ) : (
+          <Statistics
+            item={stateNew}
+            totalFeedback={this.countTotalFeedback()}
+            positiveFeedbackPercentage={this.countPositiveFeedbackPercentage()}
+          />
+        )}
+      </>
+    );
   }
 }
