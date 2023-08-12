@@ -1,21 +1,19 @@
-import { Topic, Wrapper, Text } from './Statistics.styled';
-
+import { Wrapper, Text } from './Statistics.styled';
 export const Statistics = ({
-  item: { good, neutral, bad },
+  good,
+  neutral,
+  bad,
   totalFeedback,
-  positiveFeedbackPercentage,
+  positivePercentage,
 }) => {
   return (
     <>
       <Wrapper>
-        <>
-          <Topic>Statistics</Topic>
-          <Text>Good: {good}</Text>
-          <Text>Neutral: {neutral}</Text>
-          <Text>Bad: {bad}</Text>
-          <Text>Total: {totalFeedback}</Text>
-          <Text>Positive feedback: {positiveFeedbackPercentage}%</Text>
-        </>
+        <Text>Good: {good}</Text>
+        <Text>Neutral: {neutral}</Text>
+        <Text>Bad: {bad}</Text>
+        <Text>Total: {totalFeedback}</Text>
+        <Text>Positive feedback: {positivePercentage}%</Text>
       </Wrapper>
     </>
   );

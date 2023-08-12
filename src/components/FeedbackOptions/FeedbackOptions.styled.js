@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 
 export const WrapperButton = styled.div`
-  margin: 10px;
-`;
-
-export const Topic = styled.h2`
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin-left: 40px;
 `;
 
 export const Button = styled.button`
